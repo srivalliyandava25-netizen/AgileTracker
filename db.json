@@ -1,0 +1,36 @@
+{
+  "tickets": [
+    {
+      "id": "1",
+      "title": "Fix login authentication",
+      "description": "Users cannot log in with valid credentials",
+      "status": "todo",
+      "priority": "high",
+      "assignee": "John"
+    },
+    {
+      "id": "2",
+      "title": "Create dashboard UI",
+      "description": "Build the initial dashboard layout",
+      "status": "in-progress",
+      "priority": "medium",
+      "assignee": "Sarah"
+    },
+    {
+      "id": "3",
+      "title": "Fix mobile navigation",
+      "description": "Navigation menu is broken on mobile devices",
+      "status": "todo",
+      "priority": "low",
+      "assignee": "Mike"
+    },
+    {
+      "id": "4",
+      "title": "Deploy application",
+      "description": "Deploy the application to production",
+      "status": "done",
+      "priority": "high",
+      "assignee": "David"
+    }
+  ]
+}

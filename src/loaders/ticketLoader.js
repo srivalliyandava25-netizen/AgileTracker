@@ -1,7 +1,9 @@
-import { getTicket } from "../services/ticketApi";
+import { queryClient } from "../services/queryClient";
+import { getTickets } from "../services/ticketApi";
 
-export async function ticktetLoader() {
-    const tickets = await getTicket();
-
-    return tickets;
+export async function ticketLoader() {
+  return queryClient.ensureQueryData({
+    queryKey: ["tickets"],
+    queryFn: getTickets,
+  });
 }

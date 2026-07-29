@@ -1,39 +1,71 @@
-import { useState } from "react"
-import Modal from "./Modal"
+import { useState } from "react";
+import Modal from "./Modal";
+import { useUpdateTicket } from "../hooks/useUpdateTicket";
 
 function Ticket({ ticket }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+const updateTicketMutation = useUpdateTicket();
+  function handleOpenModal() {
+    setIsModalOpen(true);
+  }
 
-    function handleOpenModal() {
-        setIsModalOpen(true);
-    }
+  function handleCloseModal() {
+    setIsModalOpen(false);
+  }
 
-    function handleCloseModal() {
-        setIsModalOpen(false);
-    }
+  function handleMove() {
+  console.log("Move clicked");
 
-    return (
-        <>
-        <div className="ticket" 
-        onClick={handleOpenModal}  >
-            <h3>{ticket.title}</h3>
-            <p>{ticket.description}</p>
+  let nextStatus;
 
-            <div className="ticket-details">
-              <span>Priority: {ticket.priority}</span>
-              <span>Assigned to: {ticket.assignee}</span>
-            </div>
-        </div>
+  if (ticket.status === "todo") {
+    nextStatus = "in-progress";
+  } else if (ticket.status === "in-progress") {
+    nextStatus = "done";
+  } else {
+    return;
+  }
 
-        {isModalOpen && (
-            <Modal
-            ticket={ticket}
-            onClose={handleCloseModal} 
-            />
-        )}
-        </>
-    );
+  console.log(nextStatus);
+
+  updateTicketMutation.mutate({
+    ticketId: ticket.id,
+    updatedData: {
+      status: nextStatus,
+    },
+  });
 }
 
-export default Ticket
+  return (
+    <>
+      <div className="ticket" onClick={handleOpenModal}>
+        <h3>{ticket.title}</h3>
+        <p>{ticket.description}</p>
+
+        <div className="ticket-details">
+          <span>Priority: {ticket.priority}</span>
+          <span>Assigned to: {ticket.assignee}</span>
+        </div>
+
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleMove();
+          }}
+        >
+          Move
+        </button>
+      </div>
+
+      {isModalOpen && (
+        <Modal
+          ticket={ticket}
+          onClose={handleCloseModal}
+        />
+      )}
+    </>
+  );
+}
+
+export default Ticket;

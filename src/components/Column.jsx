@@ -13,9 +13,10 @@ function Column({ title, tickets }) {
           <p>No tickets</p>
         ) : (
           tickets.map((ticket) => (
-            <div key={ticket.id}>
-              {ticket.title}
-            </div>
+            <Ticket
+              key={ticket.id}
+              ticket={ticket}
+            />
           ))
         )}
       </div>

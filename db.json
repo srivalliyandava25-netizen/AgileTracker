@@ -3,58 +3,50 @@
     {
       "id": "1",
       "title": "Fix login authentication",
-      "description": "Users cannot log in with valid credentials",
+      "description": "Users cannot log in with valid credentials.",
       "status": "todo",
       "priority": "high",
       "assignee": "John"
     },
     {
       "id": "2",
-      "title": "Create dashboard UI",
-      "description": "Build the initial dashboard layout",
-      "status": "in-progress",
+      "title": "Design profile page",
+      "description": "Create the user profile UI.",
+      "status": "todo",
       "priority": "medium",
-      "assignee": "Sarah"
+      "assignee": "Emma"
     },
     {
       "id": "3",
-      "title": "Fix mobile navigation",
-      "description": "Navigation menu is broken on mobile devices",
-      "status": "todo",
-      "priority": "low",
-      "assignee": "Mike"
+      "title": "Build dashboard",
+      "description": "Implement the dashboard layout.",
+      "status": "in-progress",
+      "priority": "high",
+      "assignee": "Sarah"
     },
     {
       "id": "4",
-      "title": "Deploy application",
-      "description": "Deploy the application to production",
-      "status": "done",
-      "priority": "high",
+      "title": "Connect product API",
+      "description": "Fetch products from the backend API.",
+      "status": "in-progress",
+      "priority": "low",
       "assignee": "David"
     },
     {
-      "id": "BPokxuKcaP0",
-      "title": "jkjxkxx",
-      "description": "fghjk",
-      "status": "todo",
-      "priority": "low",
-      "assignee": "Srivalli"
-    },
-    {
-      "id": "-8mxKJNrjAU",
-      "title": "hxjkx",
-      "description": "jsajoak",
-      "status": "todo",
-      "priority": "high",
-      "assignee": "sam"
-    },
-    {
-      "id": "FqqY4q1L_28",
-      "title": "ssukhss",
-      "description": "hsusisj",
+      "id": "5",
+      "title": "Fix mobile navigation",
+      "description": "Resolve responsive navbar issues.",
       "status": "done",
       "priority": "medium",
-      "assignee": "suhsijs"
+      "assignee": "Mike"
+    },
+    {
+      "id": "6",
+      "title": "Deploy application",
+      "description": "Deploy the project to production.",
+      "status": "done",
+      "priority": "high",
+      "assignee": "Sophia"
     }
   ]
 }

@@ -14,6 +14,10 @@ import { queryClient } from "../services/queryClient";
 async function createTicketAction({ request }) {
   const formData = await request.formData();
 
+  // Debug logs
+  console.log("Status:", formData.get("status"));
+  console.log("Priority:", formData.get("priority"));
+
   const ticketData = {
     title: formData.get("title"),
     description: formData.get("description"),
@@ -21,6 +25,8 @@ async function createTicketAction({ request }) {
     assignee: formData.get("assignee"),
     status: formData.get("status"),
   };
+
+  console.log("Ticket Data:", ticketData);
 
   await createTicket(ticketData);
 
@@ -36,6 +42,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <BoardPage />,
     loader: ticketLoader,
+    HydrateFallback: () => <h2>Loading...</h2>,
   },
   {
     path: "/tickets/new",

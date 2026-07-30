@@ -1,3 +1,4 @@
+@import "tailwindcss";
 .page {
   min-height: 100vh;
 }

@@ -49,7 +49,33 @@
       "status": "in-progress",
       "dueDate": "2026-07-16",
       "id": "NZjBCG_kXSg"
+    },
+    {
+      "title": "jhsis",
+      "description": "isiso",
+      "priority": "medium",
+      "assignee": "samee",
+      "status": "todo",
+      "dueDate": "2026-07-23",
+      "id": "JlWfLwc4ZZA"
+    },
+    {
+      "title": "aaa",
+      "description": "bbbbbbb",
+      "priority": "high",
+      "assignee": "n jksisis",
+      "status": "in-progress",
+      "dueDate": "2026-07-14",
+      "id": "5rjFIs0JYGA"
+    },
+    {
+      "title": "idjdkd",
+      "description": "ldjldk",
+      "priority": "medium",
+      "assignee": "milan",
+      "status": "done",
+      "duedate": null,
+      "id": "j0NeTz3hunE"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }

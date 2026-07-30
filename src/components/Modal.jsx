@@ -1,251 +1,211 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
 
-import { updateTicket } from "../services/ticketApi";
+import { useState } from "react";
+import Modal from "./Modal";
+import { useUpdateTicket } from "../hooks/useUpdateTicket";
 
-function Modal({ ticket, onClose }) {
-  const titleInputRef = useRef(null);
+function Ticket({ ticket, onDelete, isDeleting }) {
+  const [showModal, setShowModal] = useState(false);
 
-  const queryClient = useQueryClient();
+  const updateMutation = useUpdateTicket();
+  const isUpdating = updateMutation.isPending;
 
-  const [title, setTitle] = useState(ticket.title || "");
-  const [description, setDescription] = useState(
-    ticket.description || ""
-  );
-  const [status, setStatus] = useState(
-    ticket.status || "todo"
-  );
-  const [priority, setPriority] = useState(
-    ticket.priority || "medium"
-  );
-  const [assignee, setAssignee] = useState(
-    ticket.assignee || ""
-  );
-  const [dueDate, setDueDate] = useState(
-    ticket.dueDate || ""
-  );
+  function handleMove(event) {
+    event.stopPropagation();
 
-  const updateMutation = useMutation({
-    mutationFn: (updatedData) =>
-      updateTicket(ticket.id, updatedData),
+    let nextStatus;
+    let nextStatusName;
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["tickets"],
-      });
-
-      onClose();
-    },
-  });
-
-  const hasChanges =
-    title !== (ticket.title || "") ||
-    description !== (ticket.description || "") ||
-    status !== (ticket.status || "todo") ||
-    priority !== (ticket.priority || "medium") ||
-    assignee !== (ticket.assignee || "") ||
-    dueDate !== (ticket.dueDate || "");
-
-  function handleClose() {
-    if (!hasChanges || updateMutation.isPending) {
-      onClose();
+    if (ticket.status === "todo") {
+      nextStatus = "in-progress";
+      nextStatusName = "In Progress";
+    } else if (ticket.status === "in-progress") {
+      nextStatus = "done";
+      nextStatusName = "Done";
+    } else {
       return;
     }
 
-    const confirmed = window.confirm(
-      "You have unsaved changes. Discard them?"
-    );
-
-    if (confirmed) {
-      onClose();
+    if (window.confirm(`Move this ticket to ${nextStatusName}?`)) {
+      updateMutation.mutate({
+        ticketId: ticket.id,
+        updatedData: {
+          status: nextStatus,
+        },
+      });
     }
   }
 
-  useEffect(() => {
-    titleInputRef.current?.focus();
-
-    function handleKeyDown(event) {
-      if (event.key === "Escape") {
-        handleClose();
-      }
-    }
-
-    document.addEventListener(
-      "keydown",
-      handleKeyDown
-    );
-
-    return () => {
-      document.removeEventListener(
-        "keydown",
-        handleKeyDown
-      );
-    };
-  });
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const updatedData = {
-      title,
-      description,
-      status,
-      priority,
-      assignee,
-      dueDate,
-    };
-
-    updateMutation.mutate(updatedData);
+  function handleEdit(event) {
+    event.stopPropagation();
+    setShowModal(true);
   }
+
+  function handleDelete(event) {
+    event.stopPropagation();
+
+    if (window.confirm("Are you sure you want to delete this ticket?")) {
+      onDelete(ticket.id);
+    }
+  }
+
+  const priorityStyles = {
+    high: "bg-rose-50 text-rose-700 border-rose-200",
+    medium: "bg-amber-50 text-amber-700 border-amber-200",
+    low: "bg-slate-100 text-slate-600 border-slate-200",
+  };
+
+  const statusStyles = {
+    todo: "bg-slate-100 text-slate-700 border-slate-200",
+    "in-progress":
+      "bg-indigo-50 text-indigo-700 border-indigo-200",
+    done: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  };
+
+  const statusName =
+    ticket.status === "todo"
+      ? "To Do"
+      : ticket.status === "in-progress"
+      ? "In Progress"
+      : "Done";
 
   return (
-    <div
-      className="modal-overlay"
-      onClick={handleClose}
-    >
-      <div
-        className="modal"
-        onClick={(event) =>
-          event.stopPropagation()
-        }
-      >
-        <button
-          type="button"
-          className="modal-close"
-          onClick={handleClose}
-        >
-          ×
-        </button>
+    <>
+      <div className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-slate-300 hover:shadow-md">
 
-        <h2>Edit Ticket</h2>
+        {/* =========================
+            ID
+        ========================== */}
 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="title">
-            Title
-          </label>
+        <div className="mb-3">
+          <span className="rounded-md bg-slate-100 px-2 py-1 font-mono text-xs font-semibold text-slate-500">
+            #{ticket.id}
+          </span>
+        </div>
 
-          <input
-            ref={titleInputRef}
-            id="title"
-            type="text"
-            value={title}
-            onChange={(event) =>
-              setTitle(event.target.value)
-            }
-            required
-          />
+        {/* =========================
+            TITLE
+        ========================== */}
 
-          <label htmlFor="description">
-            Description
-          </label>
+        <h3 className="mb-2 text-base font-bold text-slate-900 group-hover:text-indigo-600">
+          {ticket.title}
+        </h3>
 
-          <textarea
-            id="description"
-            value={description}
-            onChange={(event) =>
-              setDescription(event.target.value)
-            }
-            required
-          />
+        {/* =========================
+            DESCRIPTION
+        ========================== */}
 
-          <label htmlFor="status">
-            Status
-          </label>
+        <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          {ticket.description || "No description"}
+        </p>
 
-          <select
-            id="status"
-            value={status}
-            onChange={(event) =>
-              setStatus(event.target.value)
-            }
-          >
-            <option value="todo">
-              To Do
-            </option>
+        {/* =========================
+            DETAILS
+        ========================== */}
 
-            <option value="in-progress">
-              In Progress
-            </option>
+        <div className="space-y-2 border-t border-slate-100 pt-3">
 
-            <option value="done">
-              Done
-            </option>
-          </select>
+          {/* STATUS */}
 
-          <label htmlFor="priority">
-            Priority
-          </label>
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Status
+            </span>
 
-          <select
-            id="priority"
-            value={priority}
-            onChange={(event) =>
-              setPriority(event.target.value)
-            }
-          >
-            <option value="low">
-              Low
-            </option>
+            <span
+              className={`rounded-md border px-2 py-1 text-xs font-semibold ${
+                statusStyles[ticket.status] || statusStyles.todo
+              }`}
+            >
+              {statusName}
+            </span>
+          </div>
 
-            <option value="medium">
-              Medium
-            </option>
+          {/* PRIORITY */}
 
-            <option value="high">
-              High
-            </option>
-          </select>
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Priority
+            </span>
 
-          <label htmlFor="assignee">
-            Assignee
-          </label>
+            <span
+              className={`rounded-md border px-2 py-1 text-xs font-semibold capitalize ${
+                priorityStyles[ticket.priority] || priorityStyles.low
+              }`}
+            >
+              {ticket.priority || "low"}
+            </span>
+          </div>
 
-          <input
-            id="assignee"
-            type="text"
-            value={assignee}
-            onChange={(event) =>
-              setAssignee(event.target.value)
-            }
-            required
-          />
+          {/* ASSIGNEE */}
 
-          <label htmlFor="dueDate">
-            Due Date
-          </label>
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Assignee
+            </span>
 
-          <input
-            id="dueDate"
-            type="date"
-            value={dueDate}
-            onChange={(event) =>
-              setDueDate(event.target.value)
-            }
-            required
-          />
+            <div className="flex items-center gap-2">
+
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold uppercase text-indigo-700">
+                {(ticket.assignee || "U").slice(0, 1)}
+              </div>
+
+              <span className="text-sm font-medium text-slate-700">
+                {ticket.assignee || "Unassigned"}
+              </span>
+
+            </div>
+          </div>
+
+        </div>
+
+        {/* =========================
+            ACTIONS
+        ========================== */}
+
+        <div className="mt-4 flex gap-2 border-t border-slate-100 pt-3">
+
+          {ticket.status !== "done" && (
+            <button
+              type="button"
+              disabled={isUpdating}
+              onClick={handleMove}
+              className="flex-1 rounded-lg bg-indigo-50 px-3 py-2 text-xs font-semibold text-indigo-700 transition hover:bg-indigo-100 disabled:opacity-50"
+            >
+              {isUpdating ? "Moving..." : "Advance →"}
+            </button>
+          )}
 
           <button
-            type="submit"
-            disabled={updateMutation.isPending}
+            type="button"
+            disabled={isDeleting}
+            onClick={handleEdit}
+            className="flex-1 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-200 disabled:opacity-50"
           >
-            {updateMutation.isPending
-              ? "Saving..."
-              : "Save Changes"}
+            Edit
           </button>
 
-          {updateMutation.isError && (
-            <p className="error">
-              Error:{" "}
-              {updateMutation.error.message}
-            </p>
-          )}
-        </form>
+          <button
+            type="button"
+            disabled={isDeleting}
+            onClick={handleDelete}
+            className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-500 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 disabled:opacity-50"
+          >
+            {isDeleting ? "..." : "Delete"}
+          </button>
+
+        </div>
       </div>
-    </div>
+
+      {/* EDIT MODAL */}
+
+      {showModal && (
+        <Modal
+          ticket={ticket}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+    </>
   );
 }
 
-export default Modal;
+export default Ticket;

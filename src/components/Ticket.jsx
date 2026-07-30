@@ -1,88 +1,173 @@
+
 import { useState } from "react";
 import Modal from "./Modal";
 import { useUpdateTicket } from "../hooks/useUpdateTicket";
-import { useDeleteTicket } from "../hooks/useDeteleTicket";
 
-function Ticket({ ticket }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function Ticket({
+  ticket,
+  onDelete,
+  isDeleting,
+}) {
+  const [showModal, setShowModal] = useState(false);
 
-const updateTicketMutation = useUpdateTicket();
-  function handleOpenModal() {
-    setIsModalOpen(true);
+  const updateMutation = useUpdateTicket();
+
+  const isUpdating = updateMutation.isPending;
+
+  function handleMove(event) {
+    event.stopPropagation();
+
+    let nextStatus;
+    let nextStatusName;
+
+    if (ticket.status === "todo") {
+      nextStatus = "in-progress";
+      nextStatusName = "In Progress";
+    } else if (ticket.status === "in-progress") {
+      nextStatus = "done";
+      nextStatusName = "Done";
+    } else {
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Move this ticket to ${nextStatusName}?`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    updateMutation.mutate({
+      ticketId: ticket.id,
+      updatedData: {
+        status: nextStatus,
+      },
+    });
   }
 
-const deleteTicketMutation = useDeleteTicket();
-function handleDelete() {
-  const confirmDelete = window.confirm(
-    "Are you sure you want to delete this ticket?"
-  );
-
-  if (!confirmDelete) return;
-
-  deleteTicketMutation.mutate(ticket.id);
-}  
-
-  function handleCloseModal() {
-    setIsModalOpen(false);
+  function handleEdit(event) {
+    event.stopPropagation();
+    setShowModal(true);
   }
 
-  function handleMove() {
-  console.log("Move clicked");
+  function handleDelete(event) {
+    event.stopPropagation();
 
-  let nextStatus;
-
-  if (ticket.status === "todo") {
-    nextStatus = "in-progress";
-  } else if (ticket.status === "in-progress") {
-    nextStatus = "done";
-  } else {
-    return;
+    if (
+      window.confirm(
+        "Are you sure you want to delete this ticket?"
+      )
+    ) {
+      onDelete(ticket.id);
+    }
   }
 
-  console.log(nextStatus);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  updateTicketMutation.mutate({
-    ticketId: ticket.id,
-    updatedData: {
-      status: nextStatus,
-    },
-  });
-}
+  const dueDate = ticket.dueDate
+    ? new Date(ticket.dueDate)
+    : null;
+
+  if (dueDate) {
+    dueDate.setHours(0, 0, 0, 0);
+  }
+
+  const isOverdue =
+    dueDate &&
+    dueDate < today &&
+    ticket.status !== "done";
+
+  const isDueToday =
+    dueDate &&
+    dueDate.getTime() === today.getTime() &&
+    ticket.status !== "done";
 
   return (
     <>
-      <div className="ticket" onClick={handleOpenModal}>
+      <div className="ticket-card">
         <h3>{ticket.title}</h3>
+
         <p>{ticket.description}</p>
 
         <div className="ticket-details">
-          <span>Priority: {ticket.priority}</span>
-          <span>Assigned to: {ticket.assignee}</span>
+          <span
+            className={`status-badge ${ticket.status}`}
+          >
+            {ticket.status === "todo"
+              ? "To Do"
+              : ticket.status === "in-progress"
+              ? "In Progress"
+              : "Done"}
+          </span>
+
+          <span
+            className={`priority-badge ${ticket.priority}`}
+          >
+            Priority: {ticket.priority}
+          </span>
+
+          <span>
+            Assigned to:{" "}
+            {ticket.assignee || "Unassigned"}
+          </span>
+
+          <span
+            className={
+              isOverdue
+                ? "due-date overdue"
+                : isDueToday
+                ? "due-date due-today"
+                : "due-date"
+            }
+          >
+            Due:{" "}
+            {isOverdue
+              ? "Overdue"
+              : isDueToday
+              ? "Today"
+              : ticket.dueDate || "No due date"}
+          </span>
         </div>
 
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleMove();
-          }}
-        >
-          Move
-        </button>
+        <div className="ticket-actions">
+          {ticket.status !== "done" && (
+            <button
+              type="button"
+              disabled={isUpdating}
+              onClick={handleMove}
+            >
+              {isUpdating
+                ? "Moving..."
+                : "Move"}
+            </button>
+          )}
+
+          <button
+            type="button"
+            disabled={isDeleting}
+            onClick={handleEdit}
+          >
+            Edit
+          </button>
+
+          <button
+            type="button"
+            disabled={isDeleting}
+            onClick={handleDelete}
+          >
+            {isDeleting
+              ? "Deleting..."
+              : "Delete"}
+          </button>
+        </div>
       </div>
 
-      <button
-        onClick={(e) => {
-        e.stopPropagation();
-        handleDelete();
-        }}
-        >
-          Delete
-        </button>
-
-      {isModalOpen && (
+      {showModal && (
         <Modal
           ticket={ticket}
-          onClose={handleCloseModal}
+          onClose={() => setShowModal(false)}
         />
       )}
     </>

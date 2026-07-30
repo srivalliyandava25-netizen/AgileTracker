@@ -26,6 +26,22 @@ export async function createTicket(ticketData) {
   return response.json();
 }
 
+export async function updateTicket(ticketId, updatedData) {
+  const response = await fetch(`${API_URL}/${ticketId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update ticket");
+  }
+
+  return response.json();
+}
+
 export async function deleteTicket(ticketId) {
   const response = await fetch(`${API_URL}/${ticketId}`, {
     method: "DELETE",
@@ -33,28 +49,6 @@ export async function deleteTicket(ticketId) {
 
   if (!response.ok) {
     throw new Error("Failed to delete ticket");
-  }
-
-  return true;
-}
-
-export async function updateTicket(
-  ticketId,
-  updatedData
-) {
-  const response = await fetch(
-    `${API_URL}/${ticketId}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to update ticket");
   }
 
   return response.json();

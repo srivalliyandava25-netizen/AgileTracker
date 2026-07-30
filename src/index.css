@@ -48,3 +48,201 @@
     text-align: center;
   }
 }
+
+button {
+  cursor: pointer
+}
+
+.priority-badge {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.priority-badge.high {
+  color: red;
+}
+
+.priority-badge.medium {
+  color: orange;
+}
+
+.priority-badge.low {
+  color: green;
+}
+
+.status-badge {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-badge.todo {
+  color: orange;
+}
+
+.status-badge.in-progress {
+  color: blue;
+}
+
+.status-badge.done {
+  color: green;
+}
+
+.due-date {
+  font-weight: 500;
+}
+
+.due-date.overdue {
+  color: red;
+  font-weight: bold;
+}
+
+.priority-badge {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.priority-badge.high {
+  color: red;
+}
+
+.priority-badge.medium {
+  color: orange;
+}
+
+.priority-badge.low {
+  color: green;
+}
+
+.status-badge {
+  font-weight: bold;
+}
+
+.status-badge.todo {
+  color: orange;
+}
+
+.status-badge.in-progress {
+  color: blue;
+}
+
+.status-badge.done {
+  color: green;
+}
+
+.due-date {
+  font-weight: 500;
+}
+
+.due-date.overdue {
+  color: red;
+  font-weight: bold;
+}
+
+.due-date.due-today {
+  color: orange;
+  font-weight: bold;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.filters select,
+.filters button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+  .board-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .create-ticket-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .filters select,
+  .filters button {
+    width: 100%;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-container input,
+  .search-container button {
+    width: 100%;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-state h2 {
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+}
+
+.empty-state button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.success-message {
+  padding: 10px 15px;
+  margin: 15px 0;
+  border-radius: 6px;
+  background: #dff6e4;
+  color: #176b2c;
+  font-weight: 600;
+}
+
+.error {
+  padding: 10px 15px;
+  margin: 15px 0;
+  border-radius: 6px;
+  background: #ffe1e1;
+  color: #a00000;
+  font-weight: 600;
+}
+.ticket-error {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border-radius: 5px;
+  background: #ffe1e1;
+  color: #a00000;
+  font-size: 14px;
+}

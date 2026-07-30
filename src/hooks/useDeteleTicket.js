@@ -5,7 +5,7 @@ export function useDeleteTicket() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteTicket,
+    mutationFn: (ticketId) => deleteTicket(ticketId),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -14,7 +14,7 @@ export function useDeleteTicket() {
     },
 
     onError: (error) => {
-      console.log("Delete failed", error);
+      console.error("Delete ticket failed:", error);
     },
   });
 }

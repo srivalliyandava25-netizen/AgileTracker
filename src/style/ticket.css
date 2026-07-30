@@ -1,0 +1,156 @@
+.ticket-card {
+  background: white;
+  border-radius: 9px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+.ticket-card h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.ticket-card > p {
+  margin: 0 0 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.ticket-details {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.status-badge,
+.priority-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.todo {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-badge.in-progress {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-badge.done {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.priority-badge.low {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.priority-badge.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-badge.high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.due-date.overdue {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.due-date.due-today {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.ticket-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ticket-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font-size: 13px;
+}
+
+.ticket-actions button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.ticket-actions button:last-child {
+  background: #dc2626;
+}
+
+.ticket-actions button:last-child:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.ticket-error {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border-radius: 5px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  .ticket-card {
+    padding: 13px;
+  }
+
+  .ticket-actions {
+    flex-direction: column;
+  }
+
+  .ticket-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .ticket-card {
+    padding: 13px;
+  }
+
+  .ticket-card h3 {
+    font-size: 16px;
+  }
+
+  .ticket-card > p {
+    font-size: 14px;
+  }
+
+  .ticket-details {
+    font-size: 12px;
+  }
+
+  .ticket-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .ticket-actions button {
+    width: 100%;
+    padding: 10px;
+  }
+}

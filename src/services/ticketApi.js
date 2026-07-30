@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/tickets";
+const API_URL = "https://agiletracker-vm0l.onrender.com/tickets";
 
 export async function getTickets() {
   const response = await fetch(API_URL);
@@ -10,13 +10,23 @@ export async function getTickets() {
   return response.json();
 }
 
-export async function createTicket(ticketData) {
+export async function getTicket(id) {
+  const response = await fetch(`${API_URL}/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch ticket");
+  }
+
+  return response.json();
+}
+
+export async function createTicket(ticket) {
   const response = await fetch(API_URL, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(ticketData)
+    body: JSON.stringify(ticket),
   });
 
   if (!response.ok) {
@@ -26,13 +36,13 @@ export async function createTicket(ticketData) {
   return response.json();
 }
 
-export async function updateTicket(ticketId, updatedData) {
-  const response = await fetch(`${API_URL}/${ticketId}`, {
+export async function updateTicket(id, updatedData) {
+  const response = await fetch(`${API_URL}/${id}`, {
     method: "PATCH",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(updatedData)
+    body: JSON.stringify(updatedData),
   });
 
   if (!response.ok) {
@@ -42,14 +52,14 @@ export async function updateTicket(ticketId, updatedData) {
   return response.json();
 }
 
-export async function deleteTicket(ticketId) {
-  const response = await fetch(`${API_URL}/${ticketId}`, {
-    method: "DELETE"
+export async function deleteTicket(id) {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
   });
 
   if (!response.ok) {
     throw new Error("Failed to delete ticket");
   }
 
-  return true;
+  return response.json();
 }

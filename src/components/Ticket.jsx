@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import { useUpdateTicket } from "../hooks/useUpdateTicket";
+import { useDeleteTicket } from "../hooks/useDeteleTicket";
 
 function Ticket({ ticket }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,6 +10,17 @@ const updateTicketMutation = useUpdateTicket();
   function handleOpenModal() {
     setIsModalOpen(true);
   }
+
+const deleteTicketMutation = useDeleteTicket();
+function handleDelete() {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this ticket?"
+  );
+
+  if (!confirmDelete) return;
+
+  deleteTicketMutation.mutate(ticket.id);
+}  
 
   function handleCloseModal() {
     setIsModalOpen(false);
@@ -57,6 +69,15 @@ const updateTicketMutation = useUpdateTicket();
           Move
         </button>
       </div>
+
+      <button
+        onClick={(e) => {
+        e.stopPropagation();
+        handleDelete();
+        }}
+        >
+          Delete
+        </button>
 
       {isModalOpen && (
         <Modal

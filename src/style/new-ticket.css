@@ -1,16 +1,35 @@
 .new-ticket-page {
   min-height: 100vh;
-  padding: 30px 20px;
-  background: #f5f7fb;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 45px 20px;
 }
 
 .new-ticket-container {
-  max-width: 650px;
-  margin: 0 auto;
+  width: min(700px, 100%);
+
+  padding: 32px;
+
+  border: 1px solid #e8e8ef;
+  border-radius: 20px;
+
   background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+  box-shadow:
+    0 15px 45px rgba(30, 20, 50, 0.07);
+}
+
+.new-ticket-back {
+  display: inline-block;
+
+  margin-bottom: 25px;
+
+  color: #635bff;
+
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .new-ticket-header {
@@ -18,14 +37,15 @@
 }
 
 .new-ticket-header h1 {
-  margin: 0 0 8px;
   font-size: 28px;
-  color: #1f2937;
 }
 
 .new-ticket-header p {
-  margin: 0;
+  margin-top: 6px;
+
   color: #6b7280;
+
+  font-size: 14px;
 }
 
 .new-ticket-form {
@@ -35,8 +55,11 @@
 }
 
 .new-ticket-form label {
-  margin-top: 10px;
-  font-weight: 600;
+  margin-top: 8px;
+
+  font-size: 13px;
+  font-weight: 650;
+
   color: #374151;
 }
 
@@ -44,123 +67,123 @@
 .new-ticket-form textarea,
 .new-ticket-form select {
   width: 100%;
-  padding: 11px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 7px;
-  outline: none;
+
+  padding: 12px 13px;
+
+  border: 1px solid #dedee7;
+  border-radius: 9px;
+
   background: white;
+
+  outline: none;
+
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
 }
 
 .new-ticket-form input:focus,
 .new-ticket-form textarea:focus,
 .new-ticket-form select:focus {
-  border-color: #2563eb;
+  border-color: #635bff;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 91, 255, 0.1);
 }
 
 .new-ticket-form textarea {
-  min-height: 120px;
+  min-height: 130px;
+
   resize: vertical;
 }
 
-.new-ticket-form button {
-  margin-top: 20px;
-  padding: 12px;
-  border: none;
-  border-radius: 7px;
-  background: #2563eb;
-  color: white;
-  font-weight: 600;
-}
-
-.new-ticket-form button:hover:not(:disabled) {
-  background: #1d4ed8;
-}
-
-.new-ticket-form button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.new-ticket-back {
-  display: inline-block;
-  margin-bottom: 20px;
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.new-ticket-back:hover {
-  text-decoration: underline;
-}
-
 .new-ticket-error {
-  margin-top: 15px;
-  padding: 10px;
-  border-radius: 7px;
-  background: #fee2e2;
-  color: #b91c1c;
-}
+  margin-bottom: 15px;
 
-@media (max-width: 600px) {
-  .new-ticket-page {
-    padding: 15px 10px;
-  }
+  padding: 12px;
 
-  .new-ticket-container {
-    padding: 20px 15px;
-    border-radius: 10px;
-  }
+  border-radius: 8px;
 
-  .new-ticket-header h1 {
-    font-size: 23px;
-  }
+  background: #fef2f2;
 
-  .new-ticket-form input,
-  .new-ticket-form textarea,
-  .new-ticket-form select {
-    font-size: 16px;
-    padding: 12px;
-  }
+  color: #dc2626;
 
-  .new-ticket-form button {
-    width: 100%;
-  }
+  font-size: 13px;
 }
 
 .form-buttons {
   display: flex;
+
   gap: 10px;
-  margin-top: 10px;
+
+  margin-top: 20px;
 }
 
-.form-buttons button {
-  flex: 1;
-}
-
+.form-buttons button,
 .form-buttons a {
   flex: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 12px;
-  border-radius: 7px;
-  background: #e5e7eb;
-  color: #374151;
-  text-decoration: none;
-  font-weight: 600;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 650;
 }
 
-.form-buttons a:hover {
-  background: #d1d5db;
+.form-buttons button {
+  border: 0;
+
+  background: #635bff;
+  color: white;
+}
+
+.form-buttons button:hover {
+  background: #5148e8;
+}
+
+.form-buttons button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+.form-buttons a {
+  border: 1px solid #dedee7;
+
+  background: white;
 }
 
 @media (max-width: 600px) {
+  .new-ticket-page {
+    padding: 20px 12px;
+  }
+
+  .new-ticket-container {
+    padding: 22px 18px;
+
+    border-radius: 15px;
+  }
+
+  .new-ticket-header h1 {
+    font-size: 24px;
+  }
+
   .form-buttons {
     flex-direction: column;
   }
+}
 
-  .form-buttons button,
-  .form-buttons a {
-    width: 100%;
+@media (max-width: 400px) {
+  .new-ticket-container {
+    padding: 18px 14px;
+  }
+
+  .new-ticket-header h1 {
+    font-size: 21px;
   }
 }

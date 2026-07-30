@@ -18,13 +18,13 @@ async function createTicketAction({ request }) {
   console.log("Priority:", formData.get("priority"));
 
   const ticketData = {
-    title: formData.get("title"),
-    description: formData.get("description"),
-    priority: formData.get("priority"),
-    assignee: formData.get("assignee"),
-    status: formData.get("status"),
-    dueDate: formData.get("dueDate"),
-  };
+  title: formData.get("title"),
+  description: formData.get("description"),
+  priority: formData.get("priority"),
+  assignee: formData.get("assignee"),
+  status: formData.get("status"),
+  duedate: formData.get("dueDate"),
+};
 
     try {
     await createTicket(ticketData);

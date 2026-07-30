@@ -1,0 +1,361 @@
+/* =========================
+   BOARD HEADER
+========================= */
+
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.board-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.board-header p {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.create-ticket-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.create-ticket-btn:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   DASHBOARD STATISTICS
+========================= */
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+}
+
+.stat-card::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  right: -25px;
+  bottom: -25px;
+  border-radius: 50%;
+  background: #eef2ff;
+}
+
+.stat-card h3 {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 8px;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stat-number {
+  position: relative;
+  z-index: 1;
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.stat-card.total {
+  border-top: 4px solid #4f46e5;
+}
+
+.stat-card.todo {
+  border-top: 4px solid #f59e0b;
+}
+
+.stat-card.progress {
+  border-top: 4px solid #3b82f6;
+}
+
+.stat-card.completed {
+  border-top: 4px solid #22c55e;
+}
+
+
+/* =========================
+   COMPLETION BAR
+========================= */
+
+.completion-section {
+  padding: 20px;
+  margin-bottom: 28px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+}
+
+.completion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.completion-header h3 {
+  font-size: 16px;
+  color: #111827;
+}
+
+.completion-percentage {
+  font-weight: 700;
+  color: #4f46e5;
+}
+
+.completion-bar {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+
+.completion-progress {
+  height: 100%;
+  border-radius: inherit;
+  background: #4f46e5;
+  transition: width 0.3s ease;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.search-container input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  outline: none;
+  background: white;
+  transition: 0.2s ease;
+}
+
+.search-container input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.search-container button {
+  min-width: 80px;
+  border: none;
+  border-radius: 10px;
+  background: #e5e7eb;
+  color: #374151;
+  font-weight: 600;
+}
+
+.search-container button:hover {
+  background: #d1d5db;
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) auto;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters select,
+.filters button {
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+  background: white;
+  color: #374151;
+  outline: none;
+}
+
+.filters select:focus {
+  border-color: #4f46e5;
+}
+
+.filters button {
+  background: #111827;
+  color: white;
+  border-color: #111827;
+  font-weight: 600;
+}
+
+.filters button:hover {
+  background: #374151;
+}
+
+
+/* =========================
+   TICKET COUNT
+========================= */
+
+.ticket-count {
+  margin: 16px 0;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  padding: 60px 20px;
+  margin-top: 20px;
+  text-align: center;
+  border: 1px dashed #d1d5db;
+  border-radius: 16px;
+  background: white;
+}
+
+.empty-state h2 {
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+  color: #6b7280;
+}
+
+.empty-state button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 9px;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .board-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .board-header h1 {
+    font-size: 26px;
+  }
+
+  .create-ticket-btn {
+    width: 100%;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-number {
+    font-size: 26px;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-container button {
+    min-height: 42px;
+  }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .stat-card h3 {
+    margin: 0;
+  }
+
+  .stat-number {
+    font-size: 24px;
+  }
+}

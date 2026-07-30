@@ -14,9 +14,9 @@ export async function createTicket(ticketData) {
   const response = await fetch(API_URL, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(ticketData),
+    body: JSON.stringify(ticketData)
   });
 
   if (!response.ok) {
@@ -30,9 +30,9 @@ export async function updateTicket(ticketId, updatedData) {
   const response = await fetch(`${API_URL}/${ticketId}`, {
     method: "PATCH",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(updatedData),
+    body: JSON.stringify(updatedData)
   });
 
   if (!response.ok) {
@@ -44,12 +44,12 @@ export async function updateTicket(ticketId, updatedData) {
 
 export async function deleteTicket(ticketId) {
   const response = await fetch(`${API_URL}/${ticketId}`, {
-    method: "DELETE",
+    method: "DELETE"
   });
 
   if (!response.ok) {
     throw new Error("Failed to delete ticket");
   }
 
-  return response.json();
+  return true;
 }

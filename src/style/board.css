@@ -1,332 +1,120 @@
-.page {
-  min-height: 100vh;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 30px;
-}
-
-.board-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  margin-bottom: 25px;
-}
-
-.board-header h1 {
-  margin: 0 0 8px;
-  font-size: 32px;
-  font-weight: 700;
-  color: #111827;
-}
-
-.board-header p {
-  margin: 0;
-  color: #6b7280;
-  font-size: 15px;
-}
-
-.create-ticket-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 18px;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: background 0.2s ease;
-}
-
-.create-ticket-btn:hover {
-  background: #1d4ed8;
-}
-
-.success-message {
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  background: #dcfce7;
-  color: #166534;
-  border: 1px solid #bbf7d0;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.error {
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  background: #fee2e2;
-  color: #b91c1c;
-  border: 1px solid #fecaca;
-  font-size: 14px;
-}
-
-.search-container {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.search-container input {
-  flex: 1;
-  min-width: 0;
-  padding: 12px 14px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  outline: none;
-  background: white;
-  color: #111827;
-  transition: border-color 0.2s ease;
-}
-
-.search-container input::placeholder {
-  color: #9ca3af;
-}
-
-.search-container input:focus {
-  border-color: #2563eb;
-}
-
-.search-container button {
-  padding: 12px 18px;
-  border: none;
-  border-radius: 8px;
-  background: #6b7280;
-  color: white;
-  font-weight: 600;
-}
-
-.search-container button:hover {
-  background: #4b5563;
-}
-
-.filters {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.filters select,
-.filters button {
-  width: 100%;
-  min-width: 0;
-  padding: 11px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-}
-
-.filters select {
-  border: 1px solid #d1d5db;
-  background: white;
-  color: #374151;
-  outline: none;
-}
-
-.filters select:focus {
-  border-color: #2563eb;
-}
-
-.filters button {
-  border: none;
-  background: #374151;
-  color: white;
-  font-weight: 600;
-}
-
-.filters button:hover {
-  background: #1f2937;
-}
-
-.page > p {
-  color: #6b7280;
-  font-size: 14px;
-}
-
-.ticket-count {
-  margin: 10px 0 15px;
-  color: #6b7280;
-  font-size: 14px;
-}
-
+/* Layout container for the Kanban board */
 .board {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  align-items: start;
-}
-
-.column {
-  min-width: 0;
-  min-height: 400px;
-  padding: 15px;
-  background: #e9edf5;
-  border-radius: 10px;
-}
-
-.column-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  min-height: 80vh;
+  background-color: #f8fafc;
+  align-items: flex-start;
+  
+  /* Enables horizontal scrolling on mid-sized screens */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.column-header h2 {
-  margin: 0;
-  font-size: 18px;
-  color: #1f2937;
-}
-
-.column-header span {
-  min-width: 28px;
-  padding: 4px 8px;
-  border-radius: 20px;
-  background: white;
-  color: #374151;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.column-content {
+/* Base styles for individual columns */
+.column {
+  flex: 1 0 280px; /* Grow, don't shrink below 280px */
+  max-width: 380px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
-.column-content > p {
-  padding: 25px 0;
-  margin: 0;
-  text-align: center;
-  color: #6b7280;
-  font-size: 14px;
-}
-
-.empty-state {
-  padding: 50px 20px;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.empty-state h2 {
-  margin: 0 0 8px;
-  font-size: 20px;
-}
-
-.empty-state p {
-  margin: 0 0 20px;
-  color: #6b7280;
-  font-size: 14px;
-}
-
-.empty-state button {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 7px;
-  background: #2563eb;
-  color: white;
+/* Column Header */
+.column-title {
+  font-size: 1.125rem;
   font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.empty-state button:hover {
-  background: #1d4ed8;
+/* Ticket list wrapper within a column */
+.ticket-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-@media (max-width: 1100px) {
-  .filters {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Individual Ticket Card */
+.ticket-card {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
+.ticket-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Delete button styling */
+.delete-btn {
+  align-self: flex-end;
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+/* Disabled state when a ticket is actively being deleted */
+.delete-btn:disabled,
+.ticket-card.deleting {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================== */
+
+/* Mobile Phones (Stack columns vertically) */
+@media (max-width: 640px) {
   .board {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    padding: 0.75rem;
+    gap: 1rem;
+    align-items: stretch; /* Make columns take full width */
   }
 
   .column {
-    min-height: auto;
+    max-width: 100%;
+    min-width: 0;
   }
 }
 
-@media (max-width: 768px) {
-  .page {
-    padding: 20px 15px;
-  }
-
-  .board-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 15px;
-  }
-
-  .board-header h1 {
-    font-size: 26px;
-  }
-
-  .create-ticket-btn {
-    width: 100%;
-  }
-
-  .search-container {
-    flex-direction: column;
-  }
-
-  .search-container input,
-  .search-container button {
-    width: 100%;
-  }
-
-  .filters {
-    grid-template-columns: 1fr 1fr;
-  }
-
+/* Tablets (Horizontal scroll feed for compact spaces) */
+@media (min-width: 641px) and (max-width: 1024px) {
   .board {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    padding: 1rem;
+    gap: 1.25rem;
   }
-
+  
   .column {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .page {
-    padding: 12px 10px;
-  }
-
-  .board-header h1 {
-    font-size: 23px;
-  }
-
-  .board-header p {
-    font-size: 13px;
-  }
-
-  .filters {
-    grid-template-columns: 1fr;
-  }
-
-  .filters select,
-  .filters button {
-    padding: 12px;
-  }
-
-  .ticket-count {
-    font-size: 13px;
-  }
-
-  .column {
-    padding: 12px;
-  }
-
-  .column-header h2 {
-    font-size: 17px;
+    min-width: 300px;
   }
 }

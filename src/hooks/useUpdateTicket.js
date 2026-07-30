@@ -13,24 +13,40 @@ export function useUpdateTicket() {
         queryKey: ["tickets"],
       });
 
-      const previousTickets = queryClient.getQueryData(["tickets"]);
+      const previousTickets =
+        queryClient.getQueryData(["tickets"]);
 
-      queryClient.setQueryData(["tickets"], (oldTickets) => {
-        return oldTickets.map((ticket) =>
-          ticket.id === ticketId
-            ? { ...ticket, ...updatedData }
-            : ticket
-        );
-      });
+      queryClient.setQueryData(
+        ["tickets"],
+        (oldTickets = []) => {
+          return oldTickets.map((ticket) =>
+            ticket.id === ticketId
+              ? {
+                  ...ticket,
+                  ...updatedData,
+                }
+              : ticket
+          );
+        }
+      );
 
-      return { previousTickets };
+      return {
+        previousTickets,
+      };
     },
 
     onError: (error, variables, context) => {
-      queryClient.setQueryData(
-        ["tickets"],
-        context.previousTickets
+      console.error(
+        "Update ticket failed:",
+        error
       );
+
+      if (context?.previousTickets) {
+        queryClient.setQueryData(
+          ["tickets"],
+          context.previousTickets
+        );
+      }
     },
 
     onSettled: () => {

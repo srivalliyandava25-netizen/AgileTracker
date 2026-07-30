@@ -1,6 +1,10 @@
 import Column from "./Column";
 
-function Board({ tickets }) {
+function Board({
+  tickets = [],
+  onDelete,
+  deletingTicketId,
+}) {
   const todoTickets = tickets.filter(
     (ticket) => ticket.status === "todo"
   );
@@ -20,7 +24,8 @@ function Board({ tickets }) {
   ];
 
   const uncategorizedTickets = tickets.filter(
-    (ticket) => !validStatuses.includes(ticket.status)
+    (ticket) =>
+      !validStatuses.includes(ticket.status)
   );
 
   return (
@@ -28,22 +33,30 @@ function Board({ tickets }) {
       <Column
         title="To Do"
         tickets={todoTickets}
+        onDelete={onDelete}
+        deletingTicketId={deletingTicketId}
       />
 
       <Column
         title="In Progress"
         tickets={inProgressTickets}
+        onDelete={onDelete}
+        deletingTicketId={deletingTicketId}
       />
 
       <Column
         title="Done"
         tickets={doneTickets}
+        onDelete={onDelete}
+        deletingTicketId={deletingTicketId}
       />
 
       {uncategorizedTickets.length > 0 && (
         <Column
           title="Uncategorized"
           tickets={uncategorizedTickets}
+          onDelete={onDelete}
+          deletingTicketId={deletingTicketId}
         />
       )}
     </div>

@@ -14,7 +14,6 @@ import { queryClient } from "../services/queryClient";
 async function createTicketAction({ request }) {
   const formData = await request.formData();
 
-  // Debug logs
   console.log("Status:", formData.get("status"));
   console.log("Priority:", formData.get("priority"));
 
@@ -24,17 +23,22 @@ async function createTicketAction({ request }) {
     priority: formData.get("priority"),
     assignee: formData.get("assignee"),
     status: formData.get("status"),
+    dueDate: formData.get("dueDate"),
   };
 
-  console.log("Ticket Data:", ticketData);
+    try {
+    await createTicket(ticketData);
 
-  await createTicket(ticketData);
+    await queryClient.invalidateQueries({
+      queryKey: ["tickets"],
+    });
 
-  await queryClient.invalidateQueries({
-    queryKey: ["tickets"],
-  });
-
-  return redirect("/");
+    return redirect("/");
+  } catch (error) {
+    return {
+      error: "Failed to create ticket. Please try again.",
+    };
+  }
 }
 
 const router = createBrowserRouter([

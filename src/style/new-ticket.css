@@ -1,0 +1,166 @@
+.new-ticket-page {
+  min-height: 100vh;
+  padding: 30px 20px;
+  background: #f5f7fb;
+}
+
+.new-ticket-container {
+  max-width: 650px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.new-ticket-header {
+  margin-bottom: 25px;
+}
+
+.new-ticket-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.new-ticket-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.new-ticket-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.new-ticket-form label {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.new-ticket-form input,
+.new-ticket-form textarea,
+.new-ticket-form select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  outline: none;
+  background: white;
+}
+
+.new-ticket-form input:focus,
+.new-ticket-form textarea:focus,
+.new-ticket-form select:focus {
+  border-color: #2563eb;
+}
+
+.new-ticket-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.new-ticket-form button {
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+}
+
+.new-ticket-form button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.new-ticket-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.new-ticket-back {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.new-ticket-back:hover {
+  text-decoration: underline;
+}
+
+.new-ticket-error {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 7px;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+@media (max-width: 600px) {
+  .new-ticket-page {
+    padding: 15px 10px;
+  }
+
+  .new-ticket-container {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  .new-ticket-header h1 {
+    font-size: 23px;
+  }
+
+  .new-ticket-form input,
+  .new-ticket-form textarea,
+  .new-ticket-form select {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .new-ticket-form button {
+    width: 100%;
+  }
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.form-buttons button {
+  flex: 1;
+}
+
+.form-buttons a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 7px;
+  background: #e5e7eb;
+  color: #374151;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-buttons a:hover {
+  background: #d1d5db;
+}
+
+@media (max-width: 600px) {
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .form-buttons button,
+  .form-buttons a {
+    width: 100%;
+  }
+}

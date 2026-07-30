@@ -1,6 +1,6 @@
-import Ticket from './Ticket'
+import Ticket from "./Ticket";
 
-function Column({ title, tickets }) {
+function Column({ title, tickets, onDelete, deletingTicketId }) {
   return (
     <div className="column">
       <div className="column-header">
@@ -16,6 +16,8 @@ function Column({ title, tickets }) {
             <Ticket
               key={ticket.id}
               ticket={ticket}
+              onDelete={onDelete}
+              isDeleting={deletingTicketId === ticket.id}
             />
           ))
         )}

@@ -12,7 +12,7 @@
       "id": "2",
       "title": "Design profile page",
       "description": "Create the user profile UI.",
-      "status": "todo",
+      "status": "done",
       "priority": "medium",
       "assignee": "Emma"
     },
@@ -20,7 +20,7 @@
       "id": "3",
       "title": "Build dashboard",
       "description": "Implement the dashboard layout.",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
       "assignee": "Sarah"
     },
@@ -30,7 +30,8 @@
       "description": "Fetch products from the backend API.",
       "status": "in-progress",
       "priority": "low",
-      "assignee": "David"
+      "assignee": "David",
+      "dueDate": "2026-07-07"
     },
     {
       "id": "5",
@@ -41,12 +42,13 @@
       "assignee": "Mike"
     },
     {
-      "id": "6",
-      "title": "Deploy application",
-      "description": "Deploy the project to production.",
-      "status": "done",
+      "title": "nxnxjsjx",
+      "description": "jnsij",
       "priority": "high",
-      "assignee": "Sophia"
+      "assignee": "jsnxk",
+      "status": "in-progress",
+      "dueDate": "2026-07-16",
+      "id": "NZjBCG_kXSg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

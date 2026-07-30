@@ -48,5 +48,6 @@
       "priority": "high",
       "assignee": "Sophia"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -26,6 +26,18 @@ export async function createTicket(ticketData) {
   return response.json();
 }
 
+export async function deleteTicket(ticketId) {
+  const response = await fetch(`${API_URL}/${ticketId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete ticket");
+  }
+
+  return true;
+}
+
 export async function updateTicket(
   ticketId,
   updatedData

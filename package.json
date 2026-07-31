@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "server": "node server.js",
-    "build": "vite build"
+  "dev": "vite",
+  "server": "json-server --watch db.json --port 3001",
+  "build": "vite",
+  "start": "node server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

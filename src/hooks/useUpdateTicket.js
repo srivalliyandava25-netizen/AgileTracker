@@ -8,48 +8,7 @@ export function useUpdateTicket() {
     mutationFn: ({ ticketId, updatedData }) =>
       updateTicket(ticketId, updatedData),
 
-    onMutate: async ({ ticketId, updatedData }) => {
-      await queryClient.cancelQueries({
-        queryKey: ["tickets"],
-      });
-
-      const previousTickets =
-        queryClient.getQueryData(["tickets"]);
-
-      queryClient.setQueryData(
-        ["tickets"],
-        (oldTickets = []) => {
-          return oldTickets.map((ticket) =>
-            ticket.id === ticketId
-              ? {
-                  ...ticket,
-                  ...updatedData,
-                }
-              : ticket
-          );
-        }
-      );
-
-      return {
-        previousTickets,
-      };
-    },
-
-    onError: (error, variables, context) => {
-      console.error(
-        "Update ticket failed:",
-        error
-      );
-
-      if (context?.previousTickets) {
-        queryClient.setQueryData(
-          ["tickets"],
-          context.previousTickets
-        );
-      }
-    },
-
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["tickets"],
       });

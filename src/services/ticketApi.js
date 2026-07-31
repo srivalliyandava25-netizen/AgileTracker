@@ -1,5 +1,5 @@
 const API_URL =
-  "https://agiletracker-vm0l.onrender.com/tickets";
+  "https://json-data-a8zf.onrender.com/tickets";
 
 export async function getTickets() {
   const response = await fetch(API_URL);
